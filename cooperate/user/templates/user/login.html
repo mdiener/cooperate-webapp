@@ -1,0 +1,12 @@
+<div>
+  <div>
+    <form action="/login/" method="POST">
+      {% csrf_token %}
+      {{ form }}
+      <div class="form-row">
+        <input type="submit" id="login-form-btn" value="Submit">
+      </div>
+    </form>
+  </div>
+  <a href="/signup">Signup Here!</a>
+</div>
