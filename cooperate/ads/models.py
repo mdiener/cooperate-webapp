@@ -35,7 +35,7 @@ class Ad(models.Model):
     data = {}
 
     for f in chain(opts.concrete_fields, opts.private_fields):
-      if f.name != 'ad_type':
+      if f.name != "ad_type":
         data[f.name] = f.value_from_object(self)
 
     data["ad_type"] = self.ad_type.name

@@ -17,7 +17,7 @@ def combine_ads() -> pandas.DataFrame:
   return df_ads.groupby(["ad_type", "date"]).agg({"id": ["count"], "actual_spend": ["sum"], "cost_share": [lambda cs: cs.tolist()[0]], "reimbursement": ["sum"]})
 
 
-@login_required(login_url='/')
+@login_required(login_url="/")
 def index(request):
   df = combine_ads()
   data = []
@@ -25,19 +25,19 @@ def index(request):
     data.append({
       "date": row[1].name[1].strftime("%m-%d-%Y"),
       "count": row[1]["id"]["count"],
-      "actual_spend": '${0:.2f}'.format(row[1]["actual_spend"]["sum"]),
-      "cost_share": '${0:.2f}'.format(row[1]["cost_share"]["<lambda>"]),
+      "actual_spend": "${0:.2f}".format(row[1]["actual_spend"]["sum"]),
+      "cost_share": "${0:.2f}".format(row[1]["cost_share"]["<lambda>"]),
       "ad_type": row[1].name[0],
-      "reimbursement": '${0:.2f}'.format(row[1]["reimbursement"]["sum"])
+      "reimbursement": "${0:.2f}".format(row[1]["reimbursement"]["sum"])
     })
 
   return render(request, "ads/index.html", { "ads": sorted(data, key=itemgetter("date"), reverse=True) })
 
 
-@login_required(login_url='/')
+@login_required(login_url="/")
 def manage(request):
   if request.method == "GET":
-    return render(request, 'ads/manage.html', { "form": AdTypeForm() })
+    return render(request, "ads/manage.html", { "form": AdTypeForm() })
 
 
 @login_required(login_url="/")
@@ -61,7 +61,7 @@ def manage_ad_type(request):
           ad_form.fields["actual_spend"].initial = ad_type.limit_max
           ad_form.fields["actual_spend"].widget = forms.NumberInput(attrs={ "readonly": True })
 
-    return render(request, 'ads/manage_actual_spend.html', { "form": ad_form, "min": ad_type.limit_min, "max": ad_type.limit_max })
+    return render(request, "ads/manage_actual_spend.html", { "form": ad_form, "min": ad_type.limit_min, "max": ad_type.limit_max })
 
 
 @login_required(login_url="/")
@@ -77,6 +77,6 @@ def manage_actual_spend(request):
       )
       ad.save()
 
-      return HttpResponseRedirect('/ads')
+      return HttpResponseRedirect("/ads")
 
-    return render(request, 'ads/manage_actual_spend.html', { "form": form, "min": 0, "max": 0 })
+    return render(request, "ads/manage_actual_spend.html", { "form": form, "min": 0, "max": 0 })

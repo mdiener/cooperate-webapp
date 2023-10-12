@@ -18,15 +18,15 @@ def signup(request):
       user.last_name = form.cleaned_data["last_name"]
       user.save()
 
-      return HttpResponseRedirect('/login')
+      return HttpResponseRedirect("/login")
     else:
-      return HttpResponseRedirect('/signup')
+      return HttpResponseRedirect("/signup")
 
 
 def login(request):
   if request.method == "GET":
     if request.user.is_authenticated:
-      return HttpResponseRedirect('/ads')
+      return HttpResponseRedirect("/ads")
 
     return render(request, "user/login.html", { "form": LoginForm() })
   elif request.method == "POST":
@@ -36,13 +36,13 @@ def login(request):
       if user is not None:
         django_login(request, user)
 
-        return HttpResponseRedirect('/ads')
+        return HttpResponseRedirect("/ads")
       else:
-        return HttpResponseRedirect('/signup')
+        return HttpResponseRedirect("/signup")
     else:
-      return HttpResponseRedirect('/signup')
+      return HttpResponseRedirect("/signup")
 
 
 def logout(request):
   django_logout(request)
-  return HttpResponseRedirect('/login')
+  return HttpResponseRedirect("/login")

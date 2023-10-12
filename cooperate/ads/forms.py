@@ -8,8 +8,6 @@ def _ad_type_choices():
   for ad_type in ad_types:
     data.append((ad_type.id, ad_type.name))
 
-  print(data)
-
   return data
 
 
@@ -19,5 +17,5 @@ class AdTypeForm(forms.Form):
 
 class AdForm(forms.Form):
   actual_spend = forms.DecimalField(decimal_places=2, max_digits=14, widget=forms.NumberInput)
-  date = forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control', 'type':'date'}))
+  date = forms.DateField(widget=forms.TextInput(attrs={"class": "form-control", "type":"date"}))
   ad_type = forms.CharField(widget=forms.HiddenInput, required=True, initial=0)
