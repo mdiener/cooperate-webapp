@@ -1,11 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
 <div>
   <div>
     <form action="/signup/" method="POST">
       {% csrf_token %}
-      {{ form }}
+      {% for field in form %}
+      {% if not field.is_hidden %}
+        <div class="form-row">
+          {{ field.label_tag }} {{ field }}
+        </div>
+      {% else %}
+        {{ field }}
+      {% endif %}
+      {% endfor %}
+
       <div class="form-row">
-        <input type="submit" id="signup-form-btn" value="Submit">
+        <input class="button" type="submit" value="Submit">
       </div>
     </form>
   </div>
 </div>
+{% endblock %}

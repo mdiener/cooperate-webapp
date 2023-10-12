@@ -25,5 +25,8 @@ urlpatterns = [
   path('signup/', user_views.signup, name='signup'),
   path('login/', user_views.login, name='login'),
   path('logout/', user_views.logout, name='logout'),
-  path('ads/', ads_views.index, name="ads")
+  path('ads/', ads_views.index, name="ads"),
+  path('ads/manage/', ads_views.manage, name="manage_ads"),
+  path('ads/manage_ad_type/', ads_views.manage_ad_type, name="manage_ads_ad_type"),
+  path('ads/manage_actual_spend/', ads_views.manage_actual_spend, name="manage_ads_actual_spend")
 ]

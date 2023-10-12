@@ -1,0 +1,159 @@
+:root {
+  --color-blue: rgb(4, 31, 73);
+  --color-orange: rgb(242, 93, 44);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: block;
+  font-family: sans-serif;
+  color: var(--color-blue);
+  padding: 0px;
+  margin: 0px;
+}
+
+a.button,
+input[type="submit"].button {
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: var(--color-orange);
+  color: white;
+  text-transform: uppercase;
+  border-radius: 30px;
+  outline: none;
+  user-select: none;
+  border: none;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+#content_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#content,
+#top_bar {
+  width: 100%;
+}
+
+#top_bar_wrapper {
+  width: 100%;
+  background-color: var(--color-blue);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#top_bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  height: 100px;
+}
+
+#top_bar.flex-between {
+  justify-content: space-between;
+}
+
+#top_bar ul {
+  display: block;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+#top_bar ul li {
+  display: inline-block;
+}
+
+#content {
+  margin-top: 40px;
+}
+
+.login-signup {
+  width: 100%;
+  margin-top: 50px;
+}
+
+#ads_table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#ads_table tbody tr:nth-child(odd) {
+  background-color: lightgray;
+}
+
+#ads_table td.align-right,
+#ads_table th.align-right {
+  text-align: right;
+}
+
+#ads_table td.align-left,
+#ads_table th.align-left {
+  text-align: left;
+}
+
+#ads_table td.align-center,
+#ads_table th.align-center {
+  text-align: center;
+}
+
+#ads_table td,
+#ads_table th {
+  padding: 10px;
+}
+
+form {
+  width: 100%;
+}
+
+form .form-row {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form .form-row label {
+  width: 200px;
+}
+
+form .form-row select,
+form .form-row input {
+  flex-grow: 1;
+  height: auto;
+  font-size: 16px;
+  border: none;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--color-blue);
+  outline: none;
+}
+
+@media screen and (min-width: 850px) {
+  #content,
+  #top_bar {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  #content,
+  #top_bar {
+    width: 60%;
+  }
+}

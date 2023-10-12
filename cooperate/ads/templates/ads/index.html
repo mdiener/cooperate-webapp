@@ -1,10 +1,30 @@
+{% extends "ads/base.html" %}
+
+{% block ads_content %}
 <div>
-  <ul>
-  <!-- {% for ad in ads %}
-    <li>
-      <span>{{ ad.ad_type }}</span>
-      <span>{{ ad.date }}</span>
-    </li>
-  {% endfor %} -->
-  </ul>
+  <h1>View All Ads</h1>
+  <table id="ads_table">
+    <thead>
+      <tr>
+        <th class="align-center">Ad Type</th>
+        <th class="align-center">Date</th>
+        <th class="align-center">Ads Run</th>
+        <th class="align-right">Actual Spend</th>
+        <th class="align-right">Cost Sharing</th>
+        <th class="align-right">Reimbursement</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for ad in ads %}
+      <tr>
+        <td class="align-center">{{ ad.ad_type }}</td>
+        <td class="align-center">{{ ad.date }}</td>
+        <td class="align-center">{{ ad.count }}</td>
+        <td class="align-right">{{ ad.actual_spend }}</td>
+        <td class="align-right">{{ ad.cost_share }}</td>
+        <td class="align-right">{{ ad.reimbursement }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
 </div>
+{% endblock %}

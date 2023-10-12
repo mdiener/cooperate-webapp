@@ -25,7 +25,9 @@ def signup(request):
 
 def login(request):
   if request.method == "GET":
-    form = LoginForm
+    if request.user.is_authenticated:
+      return HttpResponseRedirect('/ads')
+
     return render(request, "user/login.html", { "form": LoginForm() })
   elif request.method == "POST":
     form = LoginForm(request.POST)

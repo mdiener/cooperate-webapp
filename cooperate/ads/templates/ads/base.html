@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load auth_extras %}
+
+{% block top_bar_class %}flex-between{% endblock %}
+
+{% block top_bar %}
+<ul>
+  <li><a class="button" href="/ads/">View Ads</a></li>
+{% if request.user|has_group:"ads-manager" %}
+  <li><a class="button" href="/ads/manage">Manage Ads</a></li>
+{% endif %}
+</ul>
+{% endblock %}
+
+{% block content %}
+  {% block ads_content %}{% endblock %}
+{% endblock %}

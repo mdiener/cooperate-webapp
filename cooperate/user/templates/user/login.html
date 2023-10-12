@@ -1,12 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
 <div>
   <div>
     <form action="/login/" method="POST">
       {% csrf_token %}
-      {{ form }}
+      {% for field in form %}
+      {% if not field.is_hidden %}
+        <div class="form-row">
+          {{ field.label_tag }} {{ field }}
+        </div>
+      {% else %}
+        {{ field }}
+      {% endif %}
+      {% endfor %}
+
       <div class="form-row">
-        <input type="submit" id="login-form-btn" value="Submit">
+        <input class="button" type="submit" id="login-form-btn" value="Login!">
       </div>
     </form>
   </div>
-  <a href="/signup">Signup Here!</a>
+
+  <div class="login-signup">
+    <a class="button" href="/signup">Signup Here!</a>
+  </div>
 </div>
+{% endblock %}

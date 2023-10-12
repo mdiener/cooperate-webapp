@@ -1,0 +1,31 @@
+{% extends "ads/base.html" %}
+
+{% block ads_content %}
+<div>
+  <h1>New Ad</h1>
+{% if min == max and min != 0 %}
+  <p>The money spent on the add will be set to {{ min }}.</p>
+{% elif max == 0 %}
+  <p>Please enter a value for the money spent on the ad.</p>
+{% else %}
+  <p>Please enter a value for the money spent between {{ min }} and {{ max }}.</p>
+{% endif %}
+
+  <form action="/ads/manage_actual_spend/" method="POST">
+  {% csrf_token %}
+  {% for field in form %}
+  {% if not field.is_hidden %}
+    <div class="form-row">
+      {{ field.label_tag }} {{ field }}
+    </div>
+  {% else %}
+    {{ field }}
+  {% endif %}
+  {% endfor %}
+
+    <div class="form-row">
+      <input class="button" type="submit" value="Save">
+    </div>
+  </form>
+</div>
+{% endblock %}

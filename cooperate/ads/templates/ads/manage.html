@@ -1,0 +1,23 @@
+{% extends "ads/base.html" %}
+
+{% block ads_content %}
+<div>
+  <h1>New Ad</h1>
+  <form action="/ads/manage_ad_type/" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+    {% if not field.is_hidden %}
+      <div class="form-row">
+        {{ field.label_tag }} {{ field }}
+      </div>
+    {% else %}
+      {{ field }}
+    {% endif %}
+    {% endfor %}
+
+    <div class="form-row">
+      <input class="button" type="submit" value="Continue">
+    </div>
+  </form>
+</div>
+{% endblock %}
