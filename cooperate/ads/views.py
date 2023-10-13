@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth.decorators import user_passes_test
 import pandas
 from operator import itemgetter
 from .models import Ad, AdType
@@ -35,12 +36,14 @@ def index(request):
 
 
 @login_required(login_url="/")
+@user_passes_test(lambda user: user.has_perms(["ads.change_ad", "ads.view_ad", "ads.delete_ad", "ads.add_ad"]), login_url="/", redirect_field_name="/ads/")
 def manage(request):
   if request.method == "GET":
     return render(request, "ads/manage.html", { "form": AdTypeForm() })
 
 
 @login_required(login_url="/")
+@user_passes_test(lambda user: user.has_perms(["ads.change_ad", "ads.view_ad", "ads.delete_ad", "ads.add_ad"]), login_url="/", redirect_field_name="/ads/")
 def manage_ad_type(request):
   if request.method == "POST":
     form = AdTypeForm(request.POST)
@@ -65,6 +68,7 @@ def manage_ad_type(request):
 
 
 @login_required(login_url="/")
+@user_passes_test(lambda user: user.has_perms(["ads.change_ad", "ads.view_ad", "ads.delete_ad", "ads.add_ad"]), login_url="/", redirect_field_name="/ads/")
 def manage_actual_spend(request):
   if request.method == "POST":
     form = AdForm(request.POST)

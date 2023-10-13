@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from .forms import SignupForm, LoginForm
 
@@ -14,6 +14,8 @@ def signup(request):
       password = form.cleaned_data["password"]
 
       user = User.objects.create_user(username=email, email=email, password=password)
+      group = Group.objects.get(name="ads-viewer")
+      user.groups.set([group])
       user.first_name = form.cleaned_data["first_name"]
       user.last_name = form.cleaned_data["last_name"]
       user.save()
@@ -33,6 +35,7 @@ def login(request):
     form = LoginForm(request.POST)
     if form.is_valid():
       user = authenticate(request, username=form.cleaned_data["email"], password=form.cleaned_data["password"])
+
       if user is not None:
         django_login(request, user)
 
